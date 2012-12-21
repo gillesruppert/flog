@@ -1,4 +1,56 @@
 flog
 ====
 
-Client-side logger
+flog is a light-weight configurable client-side logger that is compatible with
+CJS, AMD and script loading. Can be used with node.js as well, but there are
+probably more complete solutions such as [Winston](https://npmjs.org/package/winston);
+
+## install
+`npm install flog` or download `flog.js`
+
+## loading
+flog can be loaded as: 
+- CJS module, which is useful if you use [browserify](https://npmjs.org/package/browserify)
+or [webmake](https://npmjs.org/package/webmake) or are using flog with [node.js](http://nodejs.org).
+- AMD module with all AMD compatible loaders
+- simple script tag adding `flog` to the global namespace
+
+```javascript
+// CJS
+flog = require('flog');
+
+// AMD
+require(['flog'], function (flog) {
+})
+
+// script
+flog
+```
+
+### setting the log level
+By default, flog is set to be silent and doesn't output anything. To enable 
+logging, you need to set the level:
+
+```javascript
+flog.setLevel('info');
+```
+
+Possible values include:
+- `info`
+- `warn`
+- `error`
+- `quiet`
+- `all` - alias for `info`
+- `silent` - alias for `quiet`
+
+### creating an instance
+you can use the default flog object but you can also get instances set to
+different logging levels:
+
+```javascript
+myFlog = flog.create();
+myFlog.setLevel('error');
+myFlog.info('Hello'); // doesn't output anything
+myFlog.warn('Hello'); // doesn't output anything
+myFlog.error('Hello'); // 'Hello'
+```

@@ -1,7 +1,7 @@
 {
   "name": "flog",
   "version": "0.0.0",
-  "description": "Client-side logger",
+  "description": "light-weight configurable client-side logger. CJS, AMD, script compatible ",
   "main": "flog.js",
   "scripts": {
     "test": "./node_modules/.bin/testacular start --single-run"
