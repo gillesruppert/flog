@@ -63,6 +63,9 @@
         }
         else this.level = 'quiet';
 
+        // reset all log methods to silent
+        this.log = this.info = this.warn = this.error = EMPTY;
+
         switch (this.level) {
           case 'info':
           case 'all':
@@ -75,8 +78,6 @@
           case 'error':
             this.error = bindConsole('error');
             break;
-          default:
-            this.log = this.info = this.warn = this.error = EMPTY;
         }
 
         return this;
