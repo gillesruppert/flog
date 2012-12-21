@@ -1,9 +1,10 @@
 flog
 ====
 
-flog is a light-weight configurable client-side logger that is compatible with
-CJS, AMD and script loading. Can be used with node.js as well, but there are
+flog is a light-weight configurable front-end logger that is compatible with
+CJS, AMD and script loading. It can be used with node.js as well, but there are
 probably more complete solutions such as [Winston](https://npmjs.org/package/winston);
+Tested in IE8, IE9, IE10, Chrome, Firefox, Safari, Opera
 
 ## install
 `npm install flog` or download `flog.js`
@@ -36,11 +37,12 @@ flog.setLevel('info');
 ```
 
 Possible values include:
+- `debug`
 - `info`
 - `warn`
 - `error`
 - `quiet`
-- `all` - alias for `info`
+- `all` - alias for `debug`
 - `silent` - alias for `quiet`
 
 ### creating an instance
@@ -54,3 +56,9 @@ myFlog.info('Hello'); // doesn't output anything
 myFlog.warn('Hello'); // doesn't output anything
 myFlog.error('Hello'); // 'Hello'
 ```
+
+### logging methods
+- `flog.log()`
+- `flog.info()`
+- `flog.warn()`
+- `flog.error()`

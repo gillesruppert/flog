@@ -1,10 +1,12 @@
 (function(def){
   def('flog', [], function() {
 
+
     // actual code...
     var EMPTY = function () {};
     var levels = {
       'all': true
+    , 'debug': true
     , 'info': true
     , 'warn': true
     , 'error': true
@@ -12,34 +14,26 @@
     , 'quiet': true
     };
 
+    // fix IE9s dodgy console.log...
+    // http://whattheheadsaid.com/2011/04/internet-explorer-9s-problematic-console-object
+    if (Function.prototype.bind && typeof console !== 'undefined' && typeof console.log === "object") {
+      ['log', 'info', 'warn', 'error', 'assert', 'dir', 'clear', 'profile', 'profileEnd'].forEach(function (method) {
+        console[method] = this.call(console[method], console);
+      }, Function.prototype.bind);
+    }
+
+
     function bindConsole(methodName) {
-      if (console && console[methodName] && console[methodName].bind) {
+      if (typeof console !== 'undefined' && console[methodName] && console[methodName].bind) {
         return console[methodName].bind(console);
+      } else if (!Function.prototype.bind && typeof console !== 'undefined' && typeof console.log === "object") {
+        // IE8 -> https://twitter.com/kangax/status/56059642433900544
+        return function () { Function.prototype.call.call(console[methodName], console, Array.prototype.slice.call(arguments)); };
       } else {
         return EMPTY;
       }
     }
 
-    // deal with IE8 & IE9's weird console.log (typeof == 'object')...
-    // http://whattheheadsaid.com/2011/04/internet-explorer-9s-problematic-console-object
-    if (Function.prototype.bind && console && typeof console.log === "object") {
-      var logMethods = ["log", "info", "warn", "error", "assert", "dir", "clear", "profile", "profileEnd", "trace"];
-
-      try {
-        // IE9
-        logMethods.forEach(function (method) {
-          console[method] = this.call(console[method], console);
-        }, Function.prototype.bind);
-      } catch(e) {
-        // IE8
-        function fixIe8(method) {
-          console[method] = Function.prototype.call.bind(console[method], console);
-        }
-        for (var i = 0; i < logMethods.length; i++) {
-          fixIe8(logMethods[i]);
-        }
-      }
-    }
 
     // returns flog. Can be used as flog or as an instance
     return {
@@ -49,15 +43,17 @@
       warn: EMPTY,
       error: EMPTY,
 
-      create: function () {
+      create: function (level) {
         function F() {}
         F.prototype = this;
-        return new F();
+        var f = new F();
+        f.setLevel(level);
+        return f;
       },
 
       setLevel: function (level) {
         if (level in levels) {
-          if (level === 'all') this.level = 'info';
+          if (level === 'all') this.level = 'debug';
           else if (level === 'silent') this.level = 'quiet';
           else this.level = level;
         }
@@ -67,9 +63,11 @@
         this.log = this.info = this.warn = this.error = EMPTY;
 
         switch (this.level) {
-          case 'info':
           case 'all':
+          case 'debug':
             this.log = bindConsole('log');
+            /* falls through */
+          case 'info':
             this.info = bindConsole('info');
             /* falls through */
           case 'warn':

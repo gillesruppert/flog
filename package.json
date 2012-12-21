@@ -1,7 +1,7 @@
 {
   "name": "flog",
   "version": "0.0.0",
-  "description": "light-weight configurable client-side logger. CJS, AMD, script compatible ",
+  "description": "light-weight configurable front-end logger. CJS, AMD, script compatible ",
   "main": "flog.js",
   "scripts": {
     "test": "./node_modules/.bin/testacular start --single-run"
@@ -11,12 +11,12 @@
     "url": "git://github.com/gillesruppert/flog.git"
   },
   "keywords": [
+    "front-end",
     "client-side",
     "browser",
     "console.log",
     "logger",
-    "logging",
-    "front-end"
+    "logging"
   ],
   "author": "Gilles Ruppert <gilles@madeofbytes.com> (http://www.madeofbytes.com)",
   "license": {

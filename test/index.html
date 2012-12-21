@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>test flog</title>
+    <script src='../flog.js'></script>
+  </head>
+  <body>
+    <h1>test flog</h1>
+    <script>
+      flog.setLevel('info');
+      flog.log('info flog log');
+      flog.info('info flog info');
+      flog.warn('info warn');
+      flog.error('info error');
+
+      var myFlog = flog.create('warn');
+      myFlog.log('warn flog log');
+      myFlog.info('warn flog info');
+      myFlog.warn('warn flog warn');
+      myFlog.error('warn flog error');
+
+      var myFlog2 = flog.create('error');
+      myFlog2.log('error flog log');
+      myFlog2.info('error flog info');
+      myFlog2.warn('error flog warn');
+      myFlog2.error('error flog error');
+
+      var myFlog3 = flog.create('quiet');
+      myFlog3.log('quiet flog log');
+      myFlog3.info('quiet flog info');
+      myFlog3.warn('quiet flog warn');
+      myFlog3.error('quiet flog error');
+
+      var myFlog4 = flog.create('all');
+      myFlog4.log('all flog log');
+      myFlog4.info('all flog info');
+      myFlog4.warn('all flog warn');
+      myFlog4.error('all flog error');
+
+      var myFlog5 = flog.create('debug');
+      myFlog5.log('debug flog log');
+      myFlog5.info('debug flog info');
+      myFlog5.warn('debug flog warn');
+      myFlog5.error('debug flog error');
+    </script>
+  </body>
+</html>

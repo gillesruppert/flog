@@ -12,6 +12,7 @@ files = [
   MOCHA_ADAPTER,
   'flog.js',
   'node_modules/expect.js/expect.js',
+  'node_modules/sinon/lib/sinon.js',
   'test/*.test.js'
 ];
 

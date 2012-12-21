@@ -10,6 +10,10 @@ describe('flog', function () {
     expect(flog).to.be.an('object');
   });
 
+  it('should have a default level of quiet', function () {
+    expect(flog.level).to.be('quiet');
+  });
+
   describe('#create()', function () {
     it('should return an instance of flog', function () {
       expect(flog.create()).to.be.an('object');
@@ -25,6 +29,13 @@ describe('flog', function () {
       expect(this.flog.warn).to.be(flog.warn);
       expect(this.flog.error).to.be(flog.error);
     });
+
+    it ('should set the level if a value was passed', function () {
+      var myFlog = flog.create('info');
+      expect(myFlog.level).to.be('info');
+      expect(flog.level).to.be('quiet');
+
+    });
   });
 
   describe('#setLevel()', function () {
@@ -34,7 +45,7 @@ describe('flog', function () {
     });
 
     it('should set valid values', function () {
-      var levels = ['info', 'warn', 'error', 'quiet'],
+      var levels = ['debug', 'info', 'warn', 'error', 'quiet'],
           i = 0;
       for (; i < levels.length; i++) {
         this.flog.setLevel(levels[i]);
@@ -51,8 +62,8 @@ describe('flog', function () {
       }
     });
 
-    it('should allow "info" and "quiet" aliases "all" and "silent"', function () {
-      expect(this.flog.setLevel('all').level).to.be('info');
+    it('should allow "debug" and "quiet" aliases "all" and "silent"', function () {
+      expect(this.flog.setLevel('all').level).to.be('debug');
       expect(this.flog.setLevel('silent').level).to.be('quiet');
     });
 
