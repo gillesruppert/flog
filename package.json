@@ -1,0 +1,27 @@
+{
+  "name": "flog",
+  "version": "0.0.0",
+  "description": "Client-side logger",
+  "main": "flog.js",
+  "scripts": {
+    "test": "./node_modules/.bin/testacular start --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gillesruppert/flog.git"
+  },
+  "keywords": [
+    "client-side",
+    "browser",
+    "console.log",
+    "logger",
+    "logging",
+    "front-end"
+  ],
+  "author": "Gilles Ruppert <gilles@madeofbytes.com> (http://www.madeofbytes.com)",
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/gillesruppert/flog/raw/master/LICENSE"
+  }
+  "readmeFilename": "README.md"
+}
