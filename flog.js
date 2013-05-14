@@ -1,7 +1,4 @@
-(function(def){
-  def('flog', [], function() {
-
-
+(function() {
     // actual code...
     var EMPTY = function () {};
     var levels = {
@@ -36,7 +33,7 @@
 
 
     // returns flog. Can be used as flog or as an instance
-    return {
+    var flog = {
       level: 'quiet',
       log: EMPTY,
       info: EMPTY,
@@ -82,36 +79,12 @@
       }
     };
 
-  });
-}(
-  // wrapper to run code everywhere
-  (function () {
-    var def;
-
-    // AMD
-    if (typeof define === 'function' && define.amd) {
-      def = function (name, deps, factory) {
-        define(deps, factory);
-      };
-    // CJS/node.js
-    } else if (typeof require === 'function' && typeof module !== 'undefined' && module.exports) {
-       def = function (deps, factory) {
-          module.exports = factory.apply(this, deps.map(require));
-       };
-    // script
-    } else {
-      def = function (name, deps, factory) {
-        var d, i = 0, global = this, old = global[name], mod;
-        while ((d = deps[i])) {
-          deps[i++] = this[d];
-        }
-        global[name] = mod = factory.apply(global, deps);
-        mod.noConflict = function(){
-          global[name] = old;
-          return mod;
-        };
-      };
+    if (typeof module === 'object' && typeof module.exports === 'object') {
+      module.exports = flog;
+    } else if (typeof define === 'function' && define.amd) {
+      define(flog);
     }
-    return def;
-  }())
-));
+    if (typeof window !== undefined && typeof window.flog === 'undefined') {
+      window.flog = flog;
+    }
+}());
