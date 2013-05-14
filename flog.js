@@ -1,6 +1,6 @@
 (function() {
     // actual code...
-    var EMPTY = function () {};
+    var NOOP = function () {};
     var levels = {
       'all': true
     , 'debug': true
@@ -27,7 +27,7 @@
         // IE8 -> https://twitter.com/kangax/status/56059642433900544
         return function () { Function.prototype.call.call(console[methodName], console, Array.prototype.slice.call(arguments)); };
       } else {
-        return EMPTY;
+        return NOOP;
       }
     }
 
@@ -35,10 +35,10 @@
     // returns flog. Can be used as flog or as an instance
     var flog = {
       level: 'quiet',
-      log: EMPTY,
-      info: EMPTY,
-      warn: EMPTY,
-      error: EMPTY,
+      log: NOOP,
+      info: NOOP,
+      warn: NOOP,
+      error: NOOP,
 
       create: function (level) {
         function F() {}
@@ -57,7 +57,7 @@
         else this.level = 'quiet';
 
         // reset all log methods to silent
-        this.log = this.info = this.warn = this.error = EMPTY;
+        this.log = this.info = this.warn = this.error = NOOP;
 
         switch (this.level) {
           case 'all':
