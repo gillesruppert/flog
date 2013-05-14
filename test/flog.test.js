@@ -53,7 +53,7 @@ describe('flog', function () {
       }
     });
 
-    it('should not set valid values', function () {
+    it('should not set invalid values', function () {
       var levels = ['foo', 'bar', 'baz'],
           i = 0;
       for (; i < levels.length; i++) {
