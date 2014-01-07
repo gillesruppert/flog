@@ -1,0 +1,26 @@
+{
+  "name": "flog",
+  "main": "flog.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gillesruppert/flog",
+  "authors": [
+    "Gilles Ruppert <gilles@madeofbytes.com>"
+  ],
+  "description": "light-weight configurable front-end logger. CJS, AMD, script compatible",
+  "keywords": [
+    "front-end",
+    "client-side",
+    "browser",
+    "console.log",
+    "logger",
+    "logging"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
